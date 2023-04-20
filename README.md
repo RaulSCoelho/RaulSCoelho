@@ -36,6 +36,7 @@
 [![Next.js](https://skillicons.dev/icons?i=next)](https://nextjs.org/docs/getting-started)
 [![Redux](https://skillicons.dev/icons?i=redux)](https://redux.js.org)
 [![Styled Components](https://skillicons.dev/icons?i=styledcomponents)](https://styled-components.com)
+[![Express](https://skillicons.dev/icons?i=express)](https://expressjs.com/)
 [![Python](https://skillicons.dev/icons?i=python)](https://www.python.org/doc)
 [![Django](https://skillicons.dev/icons?i=django)](https://docs.djangoproject.com/en/3.2)
 [![C#](https://skillicons.dev/icons?i=cs)](https://docs.microsoft.com/en-us/dotnet/csharp)
