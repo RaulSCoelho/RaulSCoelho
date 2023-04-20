@@ -15,10 +15,10 @@
   [![Gmail Badge](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:raul.s.coelho@gmail.com)
   
   <a href="https://github.com/raulscoelho#gh-dark-mode-only">
-    <img src="https://github-readme-stats.vercel.app/api?username=raulscoelho&show_icons=true&include_all_commits=true&theme=dracula&hide_border=true" alt="My GitHub Stats" align="center" />
+    <img src="https://github-readme-stats.vercel.app/api?username=raulscoelho&show_icons=true&include_all_commits=true&count_private=true&theme=dracula&hide_border=true" alt="My GitHub Stats" align="center" />
   </a>
   <a href="https://github.com/raulscoelho#gh-light-mode-only">
-    <img src="https://github-readme-stats.vercel.app/api?username=raulscoelho&show_icons=true&include_all_commits=true" alt="My GitHub Stats" />
+    <img src="https://github-readme-stats.vercel.app/api?username=raulscoelho&show_icons=true&include_all_commits=true&count_private=true" alt="My GitHub Stats" />
   </a>
   <a href="https://github.com/raulscoelho#gh-dark-mode-only">
     <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=raulscoelho&layout=compact&theme=dracula&hide_border=true&exclude_repo=masstransit,microservices-dotnet6" alt="My GitHub Stats" align="center" />
