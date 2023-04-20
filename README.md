@@ -10,38 +10,22 @@
     />
     <img src="/assets/github-dark.gif" width="150px" />
   </picture>
-  <div>
-    <a href="https://www.linkedin.com/in/raulscoelho/" target="_blank">
-      <img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge" />
-    </a>
-    <a href="mailto:raul.s.coelho@gmail.com" target="_blank">
-      <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="GMAIL Badge" />
-    </a>
-  </div>
-  <div>
-    <picture>
-      <source
-        srcset="https://github-readme-stats.vercel.app/api?username=raulscoelho&show_icons=true&include_all_commits=true&hide_border=true&theme=dracula"
-        media="(prefers-color-scheme: dark)"
-      />
-      <source
-        srcset="https://github-readme-stats.vercel.app/api?username=raulscoelho&show_icons=true&include_all_commits=true"
-        media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
-      />
-      <img src="https://github-readme-stats.vercel.app/api?username=raulscoelho&show_icons=true&include_all_commits=true" align="center" />
-    </picture>
-    <picture>
-      <source
-        srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=raulscoelho&layout=compact&theme=dracula&hide_border=true&hide=c%23"
-        media="(prefers-color-scheme: dark)"
-      />
-      <source
-        srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=raulscoelho&layout=compact&hide=c%23"
-        media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
-      />
-      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=raulscoelho&layout=compact&hide=c%23" align="center" />
-    </picture>
-  </div>
+  
+  [![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/raulscoelho)
+  [![Gmail Badge](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:raul.s.coelho@gmail.com)
+  
+  <a href="https://github.com/raulscoelho#gh-dark-mode-only">
+    <img src="https://github-readme-stats.vercel.app/api?username=raulscoelho&show_icons=true&include_all_commits=true&theme=dracula&hide_border=true" alt="My GitHub Stats" align="center" />
+  </a>
+  <a href="https://github.com/raulscoelho#gh-light-mode-only">
+    <img src="https://github-readme-stats.vercel.app/api?username=raulscoelho&show_icons=true&include_all_commits=true" alt="My GitHub Stats" />
+  </a>
+  <a href="https://github.com/raulscoelho#gh-dark-mode-only">
+    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=raulscoelho&layout=compact&theme=dracula&hide_border=true&exclude_repo=masstransit,microservices-dotnet6" alt="My GitHub Stats" align="center" />
+  </a>
+  <a href="https://github.com/raulscoelho#gh-light-mode-only">
+    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=raulscoelho&layout=compact&exclude_repo=masstransit,microservices-dotnet6" alt="My GitHub Stats" />
+  </a>
 </div>
 
 ## :hammer_and_wrench: Languages and Technologies  <br />
