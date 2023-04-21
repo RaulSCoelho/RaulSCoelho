@@ -14,18 +14,9 @@
   [![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/raulscoelho)
   [![Gmail Badge](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:raul.s.coelho@gmail.com)
   
-  <a href="https://github.com/raulscoelho#gh-dark-mode-only">
-    <img src="https://github-readme-stats.vercel.app/api?username=raulscoelho&show_icons=true&include_all_commits=true&count_private=true&theme=dracula&hide_border=true" alt="My GitHub Stats" align="center" />
-  </a>
-  <a href="https://github.com/raulscoelho#gh-light-mode-only">
-    <img src="https://github-readme-stats.vercel.app/api?username=raulscoelho&show_icons=true&include_all_commits=true&count_private=true" alt="My GitHub Stats" />
-  </a>
-  <a href="https://github.com/raulscoelho#gh-dark-mode-only">
-    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=raulscoelho&layout=compact&theme=dracula&hide_border=true&exclude_repo=masstransit,microservices-dotnet6" alt="My GitHub Stats" align="center" />
-  </a>
-  <a href="https://github.com/raulscoelho#gh-light-mode-only">
-    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=raulscoelho&layout=compact&exclude_repo=masstransit,microservices-dotnet6" alt="My GitHub Stats" />
-  </a>
+  | [![My GitHub Stats](https://github-readme-stats.vercel.app/api?username=raulscoelho&show_icons=true&include_all_commits=true&count_private=true&theme=dracula&hide_border=true)](https://github.com/raulscoelho#gh-dark-mode-only)[![My GitHub Stats](https://github-readme-stats.vercel.app/api?username=raulscoelho&show_icons=true&include_all_commits=true&count_private=true)](https://github.com/raulscoelho#gh-light-mode-only) | [![My GitHub Stats](https://github-readme-stats.vercel.app/api/top-langs/?username=raulscoelho&layout=compact&theme=dracula&hide_border=true&exclude_repo=masstransit,microservices-dotnet6)](https://github.com/raulscoelho#gh-dark-mode-only)[![My GitHub Stats](https://github-readme-stats.vercel.app/api/top-langs/?username=raulscoelho&layout=compact&exclude_repo=masstransit,microservices-dotnet6" alt="My GitHub Stats)](https://github.com/raulscoelho#gh-light-mode-only) |
+  | ------------- | ------------- |
+  
 </div>
 
 ## :hammer_and_wrench: Languages and Technologies  <br />
@@ -53,32 +44,12 @@
 [![C++](https://skillicons.dev/icons?i=cpp)](https://learn.microsoft.com/pt-br/cpp/cpp/?view=msvc-170)
 
 ## :file_folder: Main Repositories  <br />
-<a href="https://github.com/RaulSCoelho/Estudos">
-  <picture>
-    <source
-      srcset="https://github-readme-stats.vercel.app/api/pin/?username=raulscoelho&repo=estudos&hide_border=true&theme=dracula"
-      media="(prefers-color-scheme: dark)"
-    />
-    <source
-      srcset="https://github-readme-stats.vercel.app/api/pin/?username=raulscoelho&repo=estudos"
-      media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
-    />
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=raulscoelho&repo=estudos" align="center" />
-  </picture>
-</a>
-<a href="https://github.com/RaulSCoelho/raulscoelho.github.io">
-  <picture>
-    <source
-      srcset="https://github-readme-stats.vercel.app/api/pin/?username=raulscoelho&repo=raulscoelho.github.io&hide_border=true&theme=dracula"
-      media="(prefers-color-scheme: dark)"
-    />
-    <source
-      srcset="https://github-readme-stats.vercel.app/api/pin/?username=raulscoelho&repo=raulscoelho.github.io"
-      media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
-    />
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=raulscoelho&repo=raulscoelho.github.io" align="center" />
-  </picture>
-</a>
+<div align="center">
+  
+  | [![JavaScriptStudies](https://github-readme-stats.vercel.app/api/pin/?username=raulscoelho&repo=javascriptstudies&hide_border=true&theme=dracula)](https://github.com/RaulSCoelho/JavaScriptStudies#gh-dark-mode-only)[![JavaScriptStudies](https://github-readme-stats.vercel.app/api/pin/?username=raulscoelho&repo=javascriptstudies)](https://github.com/RaulSCoelho/JavaScriptStudies#gh-light-mode-only) | [![raulscoelho.github.io](https://github-readme-stats.vercel.app/api/pin/?username=raulscoelho&repo=raulscoelho.github.io&hide_border=true&theme=dracula)](https://github.com/RaulSCoelho/raulscoelho.github.io#gh-dark-mode-only)[![raulscoelho.github.io](https://github-readme-stats.vercel.app/api/pin/?username=raulscoelho&repo=raulscoelho.github.io)](https://github.com/RaulSCoelho/raulscoelho.github.io#gh-light-mode-only) |
+  | ------------- | ------------- |
+  
+</div>
 
 ## :detective: Profile Visits  <br />
  <p align="center"> 
