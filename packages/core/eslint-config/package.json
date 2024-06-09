@@ -1,12 +1,14 @@
 {
   "name": "@raulscoelho/eslint-config",
-  "version": "1.0.3",
+  "version": "1.1.2",
   "description": "ESLint configuration used by Raul Semicek Coelho.",
   "author": "Raul Semicek Coelho <raul.s.coelho@gmail.com>",
-  "main": "index.js",
+  "main": "src/index.js",
   "sideEffects": false,
   "files": [
-    "dist"
+    "dist",
+    "next.js",
+    "node.js"
   ],
   "publishConfig": {
     "access": "public"
@@ -17,10 +19,9 @@
     "directory": "packages/core/eslint-config"
   },
   "scripts": {
+    "dev": "yarn build:fast -- --watch",
     "build": "tsup src --dts",
     "build:fast": "tsup src",
-    "dev": "pnpm build:fast --watch",
-    "clean": "rimraf dist .turbo",
     "typecheck": "tsc --noEmit",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
@@ -37,10 +38,6 @@
     "prettier": "^3.2.5",
     "typescript": "^5.4.5"
   },
-  "devDependencies": {
-    "clean-package": "2.2.0"
-  },
-  "clean-package": "../../../clean-package.config.json",
   "tsup": {
     "clean": true,
     "target": "es2019",

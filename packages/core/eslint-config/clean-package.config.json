@@ -1,0 +1,20 @@
+{
+  "replace": {
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "exports": {
+      "./next": {
+        "types": "./dist/next.d.ts",
+        "import": "./dist/next.mjs",
+        "require": "./dist/next.js"
+      },
+      "./node": {
+        "types": "./dist/node.d.ts",
+        "import": "./dist/node.mjs",
+        "require": "./dist/node.js"
+      },
+      "./package.json": "./package.json"
+    }
+  }
+}
