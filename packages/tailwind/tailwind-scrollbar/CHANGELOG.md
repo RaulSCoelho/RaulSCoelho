@@ -1,5 +1,11 @@
 # @raulscoelho/tailwind-scrollbar
 
+## 1.1.0
+
+### Minor Changes
+
+- Tailwind CSS scrollbar variables behaviour
+
 ## 1.0.2
 
 ### Patch Changes

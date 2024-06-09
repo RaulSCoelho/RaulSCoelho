@@ -1,10 +1,10 @@
 import Color from 'color'
 
 export interface Colors {
-  thumb: string
-  thumbHover: string
-  thumbActive: string
-  track: string
+  thumb?: string
+  thumbHover?: string
+  thumbActive?: string
+  track?: string
 }
 
 export const defaultColors = {

@@ -106,7 +106,7 @@ export function tailwindScrollbar({
 
       '::-webkit-scrollbar-thumb': {
         backgroundColor: `var(--${prefix}-thumb) !important`,
-        borderRadius: `var(--${prefix}-thumb-radius) !important`,
+        borderRadius: `var(--${prefix}-thumb-radius, 0) !important`,
         border: `0.18rem solid var(--${prefix}-track) !important`
       },
 
@@ -120,7 +120,7 @@ export function tailwindScrollbar({
 
       '::-webkit-scrollbar-track': {
         backgroundColor: `var(--${prefix}-track) !important`,
-        borderRadius: `var(--${prefix}-track-radius) !important`
+        borderRadius: `var(--${prefix}-track-radius, 0) !important`
       }
     })
 
