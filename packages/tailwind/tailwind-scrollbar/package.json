@@ -1,6 +1,6 @@
 {
   "name": "@raulscoelho/tailwind-scrollbar",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Tailwind CSS plugin to customize the appearance of scrollbars with utility classes. Easily style scrollbar colors, widths, and track properties to enhance the user experience.",
   "keywords": [
     "tailwind-scrollbar"
