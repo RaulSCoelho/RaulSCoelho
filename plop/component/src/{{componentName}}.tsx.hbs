@@ -1,0 +1,19 @@
+import { forwardRef } from 'react'
+
+import { ComponentPropsWithoutRef } from '@raulscoelho/shared-utils'
+
+export interface {{capitalize componentName}}Props extends ComponentPropsWithoutRef<'div'> {}
+
+const {{capitalize componentName}} = forwardRef<HTMLDivElement, {{capitalize componentName}}Props>((props, ref) => {
+  const {children, ...rest} = props;
+
+  return (
+    <div ref={ref} {...rest}>
+      {children}
+    </div>
+  );
+});
+
+{{capitalize componentName}}.displayName = "CoelhoUI.{{capitalize componentName}}";
+
+export default {{capitalize componentName}};

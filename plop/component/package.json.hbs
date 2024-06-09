@@ -1,0 +1,42 @@
+{
+  "name": "@raulscoelho/{{componentName}}",
+  "version": "1.0.0",
+  "description": "{{description}}",
+  "keywords": [
+    "{{componentName}}"
+  ],
+  "author": "Raul Semicek Coelho <raul.s.coelho@gmail.com>",
+  "main": "src/index.ts",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaulSCoelho/RaulSCoelho.git",
+    "directory": "packages/{{outDir}}/{{componentName}}"
+  },
+  "scripts": {
+    "build": "tsup src --dts",
+    "build:fast": "tsup src",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "dependencies": {
+    "@raulscoelho/theme": "workspace:*",
+    "@raulscoelho/shared-utils": "workspace:*"
+  },
+  "devDependencies": {
+    "clean-package": "2.2.0",
+    "react": "^18.0.0"
+  },
+  "clean-package": "../../../clean-package.config.json"
+}

@@ -1,0 +1,76 @@
+{
+  "name": "raulscoelho",
+  "private": true,
+  "version": "0.1.0",
+  "author": {
+    "name": "Raul Semicek Coelho",
+    "email": "raul.s.coelho@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaulSCoelho/RaulSCoelho.git"
+  },
+  "scripts": {
+    "build": "turbo build --filter=!@raulscoelho/docs",
+    "build:fast": "turbo build:fast --filter=!@raulscoelho/docs",
+    "dev:docs": "turbo dev --filter=@raulscoelho/docs",
+    "build:docs": "turbo build --filter=@raulscoelho/docs",
+    "start:docs": "turbo start --filter=@raulscoelho/docs",
+    "typecheck": "turbo typecheck",
+    "lint": "pnpm lint:pkg && pnpm lint:docs",
+    "lint:pkg": "eslint -c .eslintrc.json ./packages/**/**/*.{ts,tsx}",
+    "lint:docs": "eslint -c .eslintrc.json ./apps/docs/**/*.{ts,tsx}",
+    "lint:fix": "eslint --fix -c .eslintrc.json ./packages/**/**/*.{ts,tsx}",
+    "lint:docs-fix": "eslint --fix -c .eslintrc.json ./apps/docs/**/*.{ts,tsx}",
+    "check:rap": "tsx scripts/check-rap-updates.ts",
+    "format:check": "prettier --check ./packages/**/**/src --cache",
+    "format:write": "prettier --write ./packages/**/**/src --cache",
+    "turbo:clean": "turbo clean && rimraf ./node_modules/.cache/turbo",
+    "clean": "pnpm turbo:clean && pnpm clean:node-modules && pnpm clean:lock && pnpm install --hoist",
+    "clean:node-modules": "rimraf ./apps/**/node_modules && rimraf ./packages/**/**/node_modules && rmdir /s /q node_modules",
+    "clean:builds": "rimraf ./apps/**/dist && rimraf ./packages/**/**/dist && rimraf ./apps/**/.turbo && rimraf ./packages/**/**/.turbo",
+    "clean:changelogs": "rimraf ./packages/**/**/CHANGELOG.md",
+    "clean:lock": "del /f /q pnpm-lock.yaml",
+    "create:cmp": "plop component",
+    "create:hook": "plop hook",
+    "version": "changeset version",
+    "release": "changeset publish",
+    "version:dev": "changeset version --snapshot dev-v2",
+    "release:dev": "changeset publish --snapshot --no-git-tag --tag dev-v2"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "0.4.6",
+    "@changesets/cli": "2.24.1",
+    "@changesets/get-release-plan": "3.0.12",
+    "@changesets/types": "5.1.0",
+    "@types/node": "^15.14.9",
+    "@types/react": "^18.2.22",
+    "@types/react-dom": "^18.2.7",
+    "eslint": "^8.49.0",
+    "eslint-config-next": "^13.5.2",
+    "glob": "^8.0.3",
+    "npm-check-updates": "^16.14.4",
+    "plop": "3.1.1",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^3.0.2",
+    "tailwindcss": "^3.3.3",
+    "tsup": "6.4.0",
+    "tsx": "^3.8.2",
+    "turbo": "1.6.3",
+    "typescript": "^4.9.5"
+  },
+  "pnpm": {
+    "overrides": {
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+    }
+  },
+  "engines": {
+    "node": ">=16.x",
+    "pnpm": ">=8.x"
+  },
+  "packageManager": "pnpm@8.7.6"
+}
