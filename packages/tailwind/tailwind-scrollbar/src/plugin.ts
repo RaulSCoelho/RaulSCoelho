@@ -36,7 +36,7 @@ function resolveConfig({ colors, layout }: Config, prefix: string) {
     const colorName = kebabCase(colorsEntries[0])
     const colorValue = colorsEntries[1]
 
-    if (!colorValue) return
+    if (!colorValue) continue
 
     try {
       const { hsl, defaultAlphaValue, scrollbarColorVariable } = getColorVariables(colorName, colorValue, prefix)
@@ -57,7 +57,7 @@ function resolveConfig({ colors, layout }: Config, prefix: string) {
    * Layout
    */
   for (const [key, value] of Object.entries(flatLayout)) {
-    if (!value) return
+    if (!value) continue
 
     const layoutVariablePrefix = `--${prefix}-${key}`
 
@@ -93,9 +93,7 @@ export function tailwindScrollbar({
   prefix = DEFAULT_PREFIX
 }: TailwindScrollbarConfig = {}) {
   const resolved = resolveConfig({ colors, layout }, prefix)
-  const resolvedColors = resolved?.colors ?? {}
-  const resolvedLayout = resolved?.layout ?? {}
-  const utilities = deepMerge(resolvedColors, resolvedLayout)
+  const utilities = deepMerge(resolved.colors, resolved.layout)
 
   return plugin(({ addBase, addUtilities, matchUtilities, theme }) => {
     addBase({
@@ -156,7 +154,7 @@ export function tailwindScrollbar({
     )
 
     matchUtilities(
-      Object.keys(resolvedColors[':root'] ?? {}).reduce(
+      Object.keys(resolved.colors[':root'] ?? {}).reduce(
         (acc, key) => {
           acc[key.slice(2)] = (value: any) => ({
             [key]: typeof value === 'function' ? value({}) : value
