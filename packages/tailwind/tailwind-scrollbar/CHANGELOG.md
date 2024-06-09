@@ -1,5 +1,11 @@
 # @raulscoelho/tailwind-scrollbar
 
+## 1.1.3
+
+### Patch Changes
+
+- Update README
+
 ## 1.1.2
 
 ### Patch Changes

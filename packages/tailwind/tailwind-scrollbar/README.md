@@ -48,7 +48,7 @@ const colors = {
 The `layout` property allows you to define custom dimensions and border radius for the scrollbar components.
 
 ```ts
-const colors = {
+const layout = {
   width: '0.5rem', // width of the scrollbar
   thumbRadius: '9999px' // border radius of the scrollbar thumb
 }
