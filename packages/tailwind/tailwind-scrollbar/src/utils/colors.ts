@@ -1,4 +1,5 @@
 import Color from 'color'
+import { DefaultColors } from 'tailwindcss/types/generated/colors'
 
 export interface Colors {
   thumb?: string
@@ -27,4 +28,15 @@ export function getColorVariables(colorName: string, colorValue: string, prefix:
   const scrollbarColorVariable = `--${prefix}-${colorName}`
 
   return { parsedColor, hsl, defaultAlphaValue, scrollbarColorVariable }
+}
+
+export function flattenColorPalette(colors: DefaultColors) {
+  return Object.assign({}, ...Object.entries(colors !== null && colors !== void 0 ? colors : {}).flatMap(([color, values]): any => {
+    if (typeof values == "object") {
+      return Object.entries(flattenColorPalette(values)).map(([number, hex]) => ({
+        [color + (number === "DEFAULT" ? "" : `-${number}`)]: hex
+      }))
+    }
+    return [{ [`${color}`]: values }]
+  }))
 }

@@ -1,8 +1,7 @@
 import deepMerge from 'deepmerge'
 import plugin from 'tailwindcss/plugin'
-const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette");
 
-import { Colors, Layout, defaultColors, defaultLayout, flattenThemeObject, getColorVariables } from './utils'
+import { Colors, Layout, defaultColors, defaultLayout, flattenColorPalette, flattenThemeObject, getColorVariables } from './utils'
 import mapKeys from 'lodash.mapkeys'
 import kebabCase from 'lodash.kebabcase'
 
