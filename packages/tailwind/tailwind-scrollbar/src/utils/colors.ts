@@ -37,6 +37,6 @@ export function flattenColorPalette(colors: DefaultColors) {
         [color + (number === "DEFAULT" ? "" : `-${number}`)]: hex
       }))
     }
-    return [{ [`${color}`]: values }]
+    return [ { [`${color}`]: values } ]
   }))
 }
