@@ -38,6 +38,9 @@
     "prettier": "^3.2.5",
     "typescript": "^5.4.5"
   },
+  "devDependencies": {
+    "clean-package": "2.2.0"
+  },
   "tsup": {
     "clean": true,
     "target": "es2019",
