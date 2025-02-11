@@ -1,5 +1,11 @@
 # @raulscoelho/eslint-config
 
+## 1.1.3
+
+### Patch Changes
+
+- no-case-declarations off
+
 ## 1.1.2
 
 ### Patch Changes
