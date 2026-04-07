@@ -8,50 +8,96 @@
       srcset="/assets/github-dark.gif"
       media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
     />
-    <img src="/assets/github-dark.gif" width="150px" />
+    <img src="/assets/github-dark.gif" width="120px" alt="Raul Semicek Coelho" />
   </picture>
-  
-  [![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/raulscoelho)
-  [![Gmail Badge](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:raul.s.coelho@gmail.com)
-  
-  | [![My GitHub Stats](https://github-readme-stats.vercel.app/api?username=raulscoelho&show_icons=true&include_all_commits=true&count_private=true&theme=dracula&hide_border=true)](https://github.com/raulscoelho#gh-dark-mode-only)[![My GitHub Stats](https://github-readme-stats.vercel.app/api?username=raulscoelho&show_icons=true&include_all_commits=true&count_private=true)](https://github.com/raulscoelho#gh-light-mode-only) | [![My GitHub Stats](https://github-readme-stats.vercel.app/api/top-langs/?username=raulscoelho&layout=compact&theme=dracula&hide_border=true&exclude_repo=masstransit,microservices-dotnet6)](https://github.com/raulscoelho#gh-dark-mode-only)[![My GitHub Stats](https://github-readme-stats.vercel.app/api/top-langs/?username=raulscoelho&layout=compact&exclude_repo=masstransit,microservices-dotnet6)](https://github.com/raulscoelho#gh-light-mode-only) |
-  | ------------- | ------------- |
-  
+
+  <h1>Raul Semicek Coelho</h1>
+
+  <p>
+    Full-stack developer focused on <strong>TypeScript</strong>, <strong>Node.js</strong>,
+    <strong>NestJS</strong>, <strong>React</strong>, <strong>Next.js</strong> and
+    <strong>PostgreSQL</strong>.
+  </p>
+
+  <p>
+    I build product-oriented applications with strong backend architecture,
+    clean code, and real business focus.
+  </p>
+
+  <p align="center">
+    <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=22&pause=900&color=8B5CF6&center=true&vCenter=true&width=700&lines=Full-stack+developer;Backend-focused+product+builder;TypeScript+%7C+Node.js+%7C+NestJS+%7C+React" alt="Typing SVG" />
+  </p>
+
+  <p>
+    <a href="https://www.linkedin.com/in/raulscoelho">
+      <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+    </a>
+    <a href="mailto:raul.s.coelho@gmail.com">
+      <img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+    </a>
+  </p>
 </div>
 
-## :hammer_and_wrench: Languages and Technologies  <br />
-[![JavaScript](https://skillicons.dev/icons?i=js)](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics)
-[![TypeScript](https://skillicons.dev/icons?i=ts)](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
-[![React](https://skillicons.dev/icons?i=react)](https://reactjs.org/docs/getting-started.html)
-[![Node.js](https://skillicons.dev/icons?i=nodejs)](https://nodejs.org/en/docs)
-[![Next.js](https://skillicons.dev/icons?i=next)](https://nextjs.org/docs/getting-started)
-[![Redux](https://skillicons.dev/icons?i=redux)](https://redux.js.org)
-[![Styled Components](https://skillicons.dev/icons?i=styledcomponents)](https://styled-components.com)
-[![Express](https://skillicons.dev/icons?i=express)](https://expressjs.com/)
-[![Python](https://skillicons.dev/icons?i=python)](https://www.python.org/doc)
-[![Django](https://skillicons.dev/icons?i=django)](https://docs.djangoproject.com/en/3.2)
-[![C#](https://skillicons.dev/icons?i=cs)](https://docs.microsoft.com/en-us/dotnet/csharp)
-[![.NET](https://skillicons.dev/icons?i=dotnet)](https://docs.microsoft.com/en-us/dotnet)
-[![RabbitMQ](https://skillicons.dev/icons?i=rabbitmq)](https://www.rabbitmq.com)
-[![HTML](https://skillicons.dev/icons?i=html)](https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML)
-[![CSS](https://skillicons.dev/icons?i=css)](https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps)
-[![MongoDB](https://skillicons.dev/icons?i=mongodb)](https://docs.mongodb.com/manual)
-[![MySQL](https://skillicons.dev/icons?i=mysql)](https://dev.mysql.com/doc)
-[![AWS](https://skillicons.dev/icons?i=aws)](https://aws.amazon.com)
-[![PHP](https://skillicons.dev/icons?i=php)](https://www.php.net)
-[![Java](https://skillicons.dev/icons?i=java)](https://www.java.com)
-![C](https://skillicons.dev/icons?i=c)
-[![C++](https://skillicons.dev/icons?i=cpp)](https://learn.microsoft.com/pt-br/cpp/cpp/?view=msvc-170)
+---
 
-## :file_folder: Main Repositories  <br />
-<div align="center">
-  
-  | [![JavaScriptStudies](https://github-readme-stats.vercel.app/api/pin/?username=raulscoelho&repo=javascriptstudies&hide_border=true&theme=dracula)](https://github.com/RaulSCoelho/JavaScriptStudies#gh-dark-mode-only)[![JavaScriptStudies](https://github-readme-stats.vercel.app/api/pin/?username=raulscoelho&repo=javascriptstudies)](https://github.com/RaulSCoelho/JavaScriptStudies#gh-light-mode-only) | [![raulscoelho.github.io](https://github-readme-stats.vercel.app/api/pin/?username=raulscoelho&repo=raulscoelho.github.io&hide_border=true&theme=dracula)](https://github.com/RaulSCoelho/raulscoelho.github.io#gh-dark-mode-only)[![raulscoelho.github.io](https://github-readme-stats.vercel.app/api/pin/?username=raulscoelho&repo=raulscoelho.github.io)](https://github.com/RaulSCoelho/raulscoelho.github.io#gh-light-mode-only) |
-  | ------------- | ------------- |
-  
-</div>
+## Tech stack
 
-## :detective: Profile Visits  <br />
- <p align="center"> 
-   <img alingn="center" src="https://profile-counter.glitch.me/raulscoelho/count.svg" />
- </p>
+### Backend
+<p>
+  <img src="https://skillicons.dev/icons?i=ts,nodejs,nestjs,express,postgres,prisma" />
+</p>
+
+### Frontend
+<p>
+  <img src="https://skillicons.dev/icons?i=react,nextjs,tailwind,html,css" />
+</p>
+
+### Tools
+<p>
+  <img src="https://skillicons.dev/icons?i=docker,git,github,aws" />
+</p>
+
+---
+
+## Featured project
+
+### [Pulselane](https://github.com/RaulSCoelho/pulselane)
+
+A product-oriented application built with a modern TypeScript stack, focused on maintainability, architecture, and real-world workflows.
+
+---
+
+## About me
+
+- Full-stack developer based in Brazil
+- Stronger focus on backend and product engineering
+- Main stack: TypeScript, Node.js, NestJS, React, Next.js, PostgreSQL
+- Interested in scalable systems, internal tools, SaaS platforms, and developer experience
+
+---
+
+## Main areas
+
+- Backend architecture
+- REST APIs
+- Authentication and authorization
+- Database modeling
+- Multi-tenant systems
+- Product-oriented full-stack applications
+
+---
+
+## What I value in software
+
+- Clear architecture
+- Strong typing
+- Maintainable code
+- Good developer experience
+- Reliable backend foundations
+- Practical solutions over unnecessary complexity
+
+---
+
+<p align="center">
+  <img src="https://streak-stats.demolab.com?user=raulscoelho&theme=dracula&hide_border=true" alt="GitHub Streak" />
+</p>
