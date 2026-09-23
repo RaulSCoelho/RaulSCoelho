@@ -1,0 +1,30 @@
+{
+  "name": "raulscoelho-packages",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.34.5",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "typecheck": "turbo run typecheck",
+    "verify": "turbo run lint typecheck",
+    "copy": "repoclip",
+    "version-packages": "changeset version && pnpm install --lockfile-only",
+    "release": "pnpm verify && changeset publish",
+    "pack:packages": "pnpm -r pack --pack-destination artifacts"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.30.0",
+    "@raulscoelho/eslint": "workspace:*",
+    "@raulscoelho/repoclip": "workspace:*",
+    "@raulscoelho/typescript": "workspace:*",
+    "eslint": "^9",
+    "globals": "17.12.0",
+    "prettier": "^3.9.8",
+    "turbo": "^2.10.13",
+    "typescript": "^6.0.3"
+  }
+}

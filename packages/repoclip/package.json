@@ -1,0 +1,39 @@
+{
+  "name": "@raulscoelho/repoclip",
+  "version": "0.1.0",
+  "description": "Copie o código de um projeto para a área de transferência.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaulSCoelho/RaulSCoelho.git",
+    "directory": "packages/repoclip"
+  },
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "repoclip": "bin/repoclip.mjs"
+  },
+  "files": [
+    "bin"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@raulscoelho/script-utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@raulscoelho/typescript": "workspace:*",
+    "@types/node": "^24",
+    "typescript": "^6.0.3"
+  }
+}

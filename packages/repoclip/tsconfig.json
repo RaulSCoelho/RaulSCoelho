@@ -1,0 +1,13 @@
+{
+  "extends": "@raulscoelho/typescript/base",
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "bin/**/*.mjs"
+  ]
+}

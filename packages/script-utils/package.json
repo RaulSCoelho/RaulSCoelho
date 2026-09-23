@@ -1,0 +1,42 @@
+{
+  "name": "@raulscoelho/script-utils",
+  "version": "0.1.0",
+  "description": "Utilitários reutilizáveis para CLIs e coleta de código.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaulSCoelho/RaulSCoelho.git",
+    "directory": "packages/script-utils"
+  },
+  "type": "module",
+  "exports": {
+    "./copy": "./src/copy/index.mjs",
+    "./copy/collect": "./src/copy/collect.mjs",
+    "./copy/choices": "./src/copy/choices.mjs",
+    "./lib/cli": "./src/lib/cli.mjs",
+    "./lib/paths": "./src/lib/paths.mjs"
+  },
+  "files": [
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.8.1",
+    "clipboardy": "^5.3.2",
+    "globby": "^16.2.4"
+  },
+  "devDependencies": {
+    "@raulscoelho/typescript": "workspace:*",
+    "@types/node": "^24",
+    "typescript": "^6.0.3"
+  }
+}

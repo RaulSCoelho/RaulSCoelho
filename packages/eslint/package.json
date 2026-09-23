@@ -1,0 +1,61 @@
+{
+  "name": "@raulscoelho/eslint",
+  "version": "0.1.0",
+  "description": "Presets compartilhados de ESLint com TypeScript e Prettier.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaulSCoelho/RaulSCoelho.git",
+    "directory": "packages/eslint"
+  },
+  "type": "module",
+  "exports": {
+    "./base": "./base.mjs",
+    "./next": "./next.mjs",
+    "./node": "./node.mjs",
+    "./prettier": "./prettier.mjs",
+    "./react-library": "./react-library.mjs",
+    "./type-checked": "./type-checked.mjs"
+  },
+  "files": [
+    "*.mjs"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@eslint/js": "^9.22.0",
+    "eslint-config-prettier": "^10.1.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.6",
+    "globals": "^17.0.0",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "typescript-eslint": "^8.70.0"
+  },
+  "peerDependencies": {
+    "eslint": "^9.22.0",
+    "eslint-config-next": "^16.0.0",
+    "eslint-plugin-react-hooks": "^7.0.0",
+    "prettier": "^3.0.0",
+    "typescript": ">=5.0.0 <6.1.0"
+  },
+  "peerDependenciesMeta": {
+    "eslint-config-next": {
+      "optional": true
+    },
+    "eslint-plugin-react-hooks": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@raulscoelho/typescript": "workspace:*",
+    "@types/node": "^24",
+    "eslint-config-next": "^16.0.0",
+    "eslint-plugin-react-hooks": "^7.0.0",
+    "typescript": "^6.0.3"
+  }
+}
