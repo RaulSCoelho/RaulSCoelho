@@ -1,5 +1,13 @@
 # @raulscoelho/repoclip
 
+## 0.2.3
+
+### Patch Changes
+
+- Usa Execa no clipboard WSL, com limite de espera e preservação de UTF-8. Delega a gravação do histórico ao write-file-atomic, mantendo sincronização em disco, validação de caminhos e bloqueio entre processos.
+- Updated dependencies
+  - @raulscoelho/script-utils@0.4.1
+
 ## 0.2.2
 
 ### Patch Changes

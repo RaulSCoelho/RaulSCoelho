@@ -1,5 +1,6 @@
 import { randomUUID } from 'node:crypto'
-import { mkdir, open, readdir, readFile, rename, rmdir } from 'node:fs/promises'
+import { mkdir, readdir, readFile, rmdir } from 'node:fs/promises'
+import writeFileAtomic from 'write-file-atomic'
 
 import { hasCode, makeParents, projectRoot, safePath, statOrNull } from '../lib/filesystem.mjs'
 
@@ -33,15 +34,13 @@ export async function withHistoryLock(root, action) {
 export async function saveRecord(record) {
   const relative = `.repomove/${record.id}/record.json`
   await makeParents(record.root, relative, true)
-  const temporary = await safePath(record.root, `.repomove/${record.id}/${randomUUID()}.tmp`, true)
-  const handle = await open(temporary, 'wx', 0o600)
-  try {
-    await handle.writeFile(`${JSON.stringify(record, null, 2)}\n`)
-    await handle.sync()
-  } finally {
-    await handle.close()
-  }
-  await rename(temporary, await safePath(record.root, relative, true))
+  const file = await safePath(record.root, relative, true)
+  await writeFileAtomic(file, `${JSON.stringify(record, null, 2)}\n`, {
+    mode: 0o600,
+    fsync: true,
+    // A biblioteca pode aguardar outra escrita; revalida o caminho ao retomar.
+    tmpfileCreated: () => safePath(record.root, relative, true)
+  })
 }
 
 /** @param {import('./plan.mjs').MovePlan} plan @returns {MoveRecord} */

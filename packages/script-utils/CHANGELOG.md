@@ -1,5 +1,11 @@
 # @raulscoelho/script-utils
 
+## 0.4.1
+
+### Patch Changes
+
+- Usa Execa no clipboard WSL, com limite de espera e preservação de UTF-8. Delega a gravação do histórico ao write-file-atomic, mantendo sincronização em disco, validação de caminhos e bloqueio entre processos.
+
 ## 0.4.0
 
 ### Minor Changes

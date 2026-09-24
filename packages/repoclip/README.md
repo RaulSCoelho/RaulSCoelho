@@ -79,6 +79,8 @@ Os filtros de exclusão e `--ignore-file` também são repetíveis. Por exemplo,
 
 Sem `--stdout`, o sistema precisa oferecer acesso à área de transferência.
 No WSL, o RepoClip usa o PowerShell do Windows para preservar acentos e quebras de linha.
+Se o clipboard não responder em 15 segundos, a operação é interrompida. Use `--stdout`
+para obter o texto sem acessar o clipboard.
 Arquivos com nomes como `.env` e chaves privadas exigem confirmação; sem terminal, exclua-os
 ou autorize com `--yes`. Essa identificação por nome não detecta todo conteúdo sensível.
 
