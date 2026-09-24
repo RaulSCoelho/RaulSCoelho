@@ -1,5 +1,11 @@
 # @raulscoelho/script-utils
 
+## 0.3.1
+
+### Patch Changes
+
+- Preserva a precisão dos identificadores de arquivos na limpeza para evitar confundir hard links distintos, inclusive no Windows. Informa quais metadados mudaram quando a remoção é interrompida.
+
 ## 0.3.0
 
 ### Minor Changes
