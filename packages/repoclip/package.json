@@ -1,6 +1,6 @@
 {
   "name": "@raulscoelho/repoclip",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Copie o código de um projeto para a área de transferência.",
   "repository": {
     "type": "git",

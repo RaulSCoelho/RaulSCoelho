@@ -1,6 +1,6 @@
 {
   "name": "@raulscoelho/repomove",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Mova e renomeie arquivos com prévia, histórico e reversão.",
   "repository": {
     "type": "git",

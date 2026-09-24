@@ -40,7 +40,7 @@ export async function discover(config, root) {
       const parts = file.split('/')
       return parts.some((_, index) => path.matchesGlob(parts.slice(0, index + 1).join('/'), pattern.replace(/\/$/, '')))
     })
-  /** @type {Map<string, {from: string, tree: boolean, output?: string}>} */
+  /** @type {Map<string, {from: string, tree: boolean, output?: string, explicit?: boolean}>} */
   const selected = new Map()
   /** @type {string[]} */
   const warnings = []
@@ -51,29 +51,42 @@ export async function discover(config, root) {
     if (excluded(from)) continue
     if (gitIgnored(from) || (info.isDirectory() && config.gitignore))
       warnings.push(`Origem explícita inclui conteúdo mesmo quando ignorado pelo Git: ${from}`)
-    selected.set(from, { from, tree: config.preserveTree })
+    selected.set(from, { from, tree: config.preserveTree, explicit: true })
   }
   const matches = await globby([...config.globs, ...config.extensions.map(extensionPattern)], {
     ...discoveryOptions,
     cwd: root,
-    onlyFiles: true
+    onlyFiles: !config.contents,
+    onlyDirectories: config.contents
   })
   for (const from of matches.sort()) {
     if (!protectedPath(from) && !gitIgnored(from) && !excluded(from) && !selected.has(from))
       selected.set(from, { from, tree: !config.flatten })
   }
+  // Pastas sobrepostas usam a primeira raiz selecionada, sem transferir filhos duas vezes.
+  if (config.contents) {
+    const roots = [...selected.keys()].sort((a, b) => a.length - b.length || a.localeCompare(b))
+    for (const from of roots) {
+      if (roots.some(parent => from.startsWith(`${parent}/`))) selected.delete(from)
+    }
+  }
   // Um diretório com exclusões vira operações sobre seus filhos permitidos.
   // O diretório original e os itens excluídos permanecem no lugar.
   for (const item of [...selected.values()]) {
     const absolute = await safePath(root, item.from)
-    if (!(await statOrNull(absolute))?.isDirectory()) continue
+    if (!(await statOrNull(absolute))?.isDirectory()) {
+      if (config.contents) throw new Error(`--contents exige diretórios: ${item.from}`)
+      continue
+    }
+    if (config.contents && (config.to === item.from || config.to.startsWith(`${item.from}/`)))
+      throw new Error(`Destino dentro da origem: ${item.from}`)
     /** @type {string[]} */
     const children = []
     let hasExclusions = false
     /** @param {string} current */
     async function walk(current) {
       const file = await safePath(root, current)
-      if (excluded(current)) {
+      if (excluded(current) || (config.contents && !item.explicit && gitIgnored(current))) {
         hasExclusions = true
         return
       }
@@ -84,18 +97,20 @@ export async function discover(config, root) {
       } else children.push(current)
     }
     await walk(item.from)
-    if (hasExclusions || config.flatten) {
+    if (hasExclusions || config.flatten || config.contents) {
       if (config.rename) throw new Error('--rename não pode dividir uma pasta por exclusões ou --flatten.')
       selected.delete(item.from)
-      for (const from of children)
+      for (const from of children.filter(from => !config.contents || from !== item.from))
         selected.set(from, {
           from,
           tree: item.tree,
-          output: config.flatten
-            ? path.basename(from)
-            : item.tree
-              ? from
-              : `${path.basename(item.from)}/${path.relative(item.from, from).split(path.sep).join('/')}`
+          output: config.contents
+            ? path.posix.relative(item.from, from)
+            : config.flatten
+              ? path.basename(from)
+              : item.tree
+                ? from
+                : `${path.basename(item.from)}/${path.relative(item.from, from).split(path.sep).join('/')}`
         })
     }
   }

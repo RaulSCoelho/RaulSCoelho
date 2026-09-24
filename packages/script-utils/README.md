@@ -112,6 +112,11 @@ Preserve `.repomove/`, onde ficam histórico e backups. Consulte os
 [exemplos e limites do RepoMove](https://github.com/RaulSCoelho/RaulSCoelho/tree/main/packages/repomove#histórico-e-desfazer)
 para recuperação após falhas.
 
+Com `contents: true`, `from` e `globs` selecionam pastas e transferem seu conteúdo,
+preservando caminhos internos. Por exemplo, `from: ["dist"]`, `to: "output"` e
+`contents: true` levam `dist/lib/util.js` para `output/lib/util.js`. Combine com
+`copy: true` para manter os arquivos de origem. As pastas de origem permanecem.
+
 ## Limpar arquivos
 
 ```js

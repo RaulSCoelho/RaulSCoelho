@@ -1,5 +1,13 @@
 # @raulscoelho/script-utils
 
+## 0.4.0
+
+### Minor Changes
+
+- Adiciona --contents para transferir o conteúdo de várias pastas preservando suas subpastas, com seleção por caminhos ou globs. Corrige a transferência de diretórios no Windows sem renomear sobre a pasta reservada no destino.
+
+  Preserva identificadores de arquivos de 64 bits nas verificações de conteúdo e de reserva do destino.
+
 ## 0.3.1
 
 ### Patch Changes

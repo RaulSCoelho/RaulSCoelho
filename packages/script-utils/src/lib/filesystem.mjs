@@ -95,9 +95,9 @@ export async function snapshot(root, relative, internal = false) {
   /** @param {string} current @param {string} suffix */
   async function visit(current, suffix) {
     const absolute = await safePath(root, current, internal)
-    const info = await lstat(absolute)
+    const info = await lstat(absolute, { bigint: true })
     if (++entries > 100_000) throw new Error('Mais de 100.000 itens. Restrinja a seleção.')
-    hash.update(JSON.stringify([suffix, info.mode]))
+    hash.update(JSON.stringify([suffix, Number(info.mode)]))
     if (info.isDirectory()) {
       directories++
       const children = (await readdir(absolute)).sort()
@@ -107,16 +107,16 @@ export async function snapshot(root, relative, internal = false) {
     } else if (info.isFile()) {
       const handle = await open(absolute, constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0))
       try {
-        const before = await handle.stat()
+        const before = await handle.stat({ bigint: true })
         if (before.ino !== info.ino || before.dev !== info.dev) throw new Error(`Arquivo substituído: ${current}`)
         const content = createHash('sha256')
         for await (const chunk of handle.createReadStream({ autoClose: false })) content.update(chunk)
-        const after = await handle.stat()
-        if (before.size !== after.size || before.mtimeMs !== after.mtimeMs || before.ctimeMs !== after.ctimeMs)
+        const after = await handle.stat({ bigint: true })
+        if (before.size !== after.size || before.mtimeNs !== after.mtimeNs || before.ctimeNs !== after.ctimeNs)
           throw new Error(`Arquivo mudou durante a leitura: ${current}`)
         hash.update(content.digest())
         files++
-        bytes += info.size
+        bytes += Number(info.size)
       } finally {
         await handle.close()
       }

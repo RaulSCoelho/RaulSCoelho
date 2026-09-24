@@ -66,9 +66,29 @@ Por exemplo, reunir todas as fotos `.jpg` no álbum:
 pnpm exec repomove --ext .jpg --to album --flatten --exclude 'album/**' --dry-run
 ```
 
-Globs e extensões selecionam arquivos, incluindo os de subpastas. Para transferir uma pasta
+Sem `--contents`, globs e extensões selecionam arquivos, incluindo os de subpastas. Para transferir uma pasta
 inteira, use `--from`. Origens repetidas ou já incluídas em uma pasta selecionada não são
 transferidas duas vezes.
+
+## Transferir somente o conteúdo das pastas
+
+Use `--contents` para deixar a pasta de origem e preservar as subpastas no destino:
+
+```sh
+pnpm exec repomove --from suitescripts/dist --glob "apps/*/netsuite-dist" --to sdf/src/FileCabinet/SuiteScripts --contents --copy --no-gitignore --dry-run
+```
+
+Nesse exemplo, `suitescripts/dist/lib/util.js` chega como `SuiteScripts/lib/util.js` e
+`apps/web/netsuite-dist/web.js` como `SuiteScripts/web.js`. Subpastas com nomes iguais
+são reunidas; arquivos com o mesmo caminho seguem a estratégia de conflitos.
+
+Troque `--dry-run` por `--yes` para executar. Retire `--copy` para mover os arquivos.
+As pastas de origem permanecem, inclusive quando ficam vazias. `--no-gitignore` inclui
+os builds ignorados pelo Git.
+
+Com `--contents`, os globs selecionam **pastas**, como `apps/*/netsuite-dist`, sem `/**/*`
+no final. A opção também aparece no menu e não combina com `--flatten`, `--preserve-tree`,
+`--rename` ou `--ext`. Pastas de origem vazias não geram operações.
 
 ## Deixar alguns itens de fora
 
@@ -173,6 +193,7 @@ Use caminhos relativos à raiz; `--to .` usa a própria raiz como destino. Coloq
 | --- | --- |
 | `--from <caminho>` | Seleciona arquivo ou pasta; repetível |
 | `--to <pasta>` | Define o destino, existente ou novo |
+| `--contents` | Transfere o conteúdo das pastas e preserva as subpastas internas |
 | `--copy` | Mantém os originais e cria cópias no destino |
 | `--glob <padrão>` | Seleciona arquivos por glob; repetível |
 | `--ext <extensão>` | Seleciona arquivos pela extensão; repetível |
@@ -199,7 +220,8 @@ Links simbólicos são rejeitados, inclusive dentro de pastas selecionadas. Dest
 raiz ou dentro da própria origem são bloqueados.
 
 O conteúdo é revalidado por SHA-256. Movimentações no mesmo volume usam `rename`; cópias e
-movimentações entre volumes usam um temporário verificado antes de finalizar. A origem só é
+movimentações entre volumes usam um temporário verificado antes de finalizar. No Windows,
+pastas são copiadas para um destino reservado e verificadas antes de remover a origem. A origem só é
 removida no modo de movimentação. Cópias não garantem preservar hard links, ACLs ou atributos
 estendidos. O tamanho mostrado é a soma dos bytes dos arquivos, não o espaço ocupado em disco.
 

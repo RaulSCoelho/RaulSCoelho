@@ -18,6 +18,7 @@ Comportamento:
   --copy                Copiar para o destino e manter os originais
   --rename <nome>        Renomear uma única origem
   --preserve-tree       Preservar caminhos relativos
+  --contents            Transferir o conteúdo das pastas, preservando subpastas
   --flatten             Reunir arquivos no destino
   --on-conflict <modo>   error (padrão), skip, rename ou overwrite com backup
   --dry-run             Apenas simular, mesmo com --yes
@@ -51,6 +52,7 @@ export function parseMoveArgs(args) {
       rename: { type: 'string' },
       'preserve-tree': { type: 'boolean' },
       flatten: { type: 'boolean' },
+      contents: { type: 'boolean' },
       'on-conflict': { type: 'string' },
       ...commonOptions
     }
@@ -80,6 +82,7 @@ export function parseMoveArgs(args) {
       rename: values.rename ?? '',
       preserveTree: values['preserve-tree'] ?? false,
       flatten: values.flatten ?? false,
+      contents: values.contents ?? false,
       onConflict: /** @type {'error'|'skip'|'rename'|'overwrite'} */ (values['on-conflict'] ?? 'error'),
       copy: values.copy ?? false,
       dryRun: values['dry-run'] ?? false,

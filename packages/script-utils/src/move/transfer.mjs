@@ -13,18 +13,18 @@ async function reserve(target, directory) {
     const file = await open(target, 'wx', 0o600)
     await file.close()
   }
-  return lstat(target)
+  return lstat(target, { bigint: true })
 }
 
-/** @param {string} target @param {import('node:fs').Stats} reserved */
+/** @param {string} target @param {import('node:fs').BigIntStats} reserved */
 async function checkReservation(target, reserved) {
-  const current = await lstat(target)
+  const current = await lstat(target, { bigint: true })
   if (
     current.ino !== reserved.ino ||
     current.dev !== reserved.dev ||
     current.size !== reserved.size ||
-    current.mtimeMs !== reserved.mtimeMs ||
-    current.ctimeMs !== reserved.ctimeMs
+    current.mtimeNs !== reserved.mtimeNs ||
+    current.ctimeNs !== reserved.ctimeNs
   )
     throw new Error(`Destino reservado foi alterado: ${target}`)
 }
@@ -42,9 +42,32 @@ export async function transfer(root, from, to, expected, { copy = false } = {}) 
   await verifySnapshot(root, from, expected, internal)
   if (await statOrNull(target)) throw new Error(`Destino ocupado após a prévia: ${to}`)
   const directory = (await lstat(source)).isDirectory()
-  /** @type {import('node:fs').Stats | null} */
+  /** @type {import('node:fs').BigIntStats | null} */
   let reserved = await reserve(target, directory)
   try {
+    // Windows não renomeia uma pasta sobre a pasta vazia usada como reserva.
+    // Mantém a reserva e copia com criação exclusiva, sem abrir uma janela para sobrescritas.
+    if (directory && process.platform === 'win32') {
+      await safePath(root, to, internal)
+      await checkReservation(target, reserved)
+      reserved = null
+      for (const name of await fs.readdir(source)) {
+        await safePath(root, `${from}/${name}`, internal)
+        const child = await safePath(root, `${to}/${name}`, internal)
+        await fs.cp(path.join(source, name), child, {
+          recursive: true,
+          dereference: false,
+          force: false,
+          errorOnExist: true,
+          preserveTimestamps: true
+        })
+      }
+      await fs.chmod(target, (await lstat(source)).mode)
+      await verifySnapshot(root, from, expected, internal)
+      await verifySnapshot(root, to, expected, internal)
+      if (!copy) await removeVerified(root, from, expected, internal)
+      return 'copy'
+    }
     await safePath(root, from, internal)
     await safePath(root, to, internal)
     await checkReservation(target, reserved)

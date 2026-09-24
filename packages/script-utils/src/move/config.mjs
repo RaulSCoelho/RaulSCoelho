@@ -13,6 +13,7 @@ import { extensionPattern, globPattern } from '../lib/patterns.mjs'
  * @property {string} [rename]
  * @property {boolean} [preserveTree]
  * @property {boolean} [flatten]
+ * @property {boolean} [contents]
  * @property {'error'|'skip'|'rename'|'overwrite'} [onConflict]
  * @property {boolean} [copy]
  * @property {boolean} [dryRun]
@@ -22,6 +23,8 @@ import { extensionPattern, globPattern } from '../lib/patterns.mjs'
 
 /** @param {MoveOptions} input */
 export function normalizeMove(input = {}) {
+  if (input.contents && (input.flatten || input.preserveTree || input.rename || input.extensions?.length))
+    throw new Error('--contents aceita pastas e não combina com --flatten, --preserve-tree, --rename ou --ext.')
   if (input.flatten && input.preserveTree) throw new Error('--flatten e --preserve-tree são incompatíveis.')
   if (
     input.rename &&
@@ -45,6 +48,7 @@ export function normalizeMove(input = {}) {
     rename: input.rename ?? '',
     preserveTree: input.preserveTree ?? false,
     flatten: input.flatten ?? false,
+    contents: input.contents ?? false,
     onConflict,
     copy: input.copy ?? false,
     dryRun: input.dryRun ?? false,

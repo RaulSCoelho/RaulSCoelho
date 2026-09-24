@@ -1,6 +1,6 @@
 {
   "name": "@raulscoelho/script-utils",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Utilitários reutilizáveis para CLIs e coleta de código.",
   "repository": {
     "type": "git",

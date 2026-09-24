@@ -109,6 +109,7 @@ export async function chooseMove(initial, root) {
             label: 'Padrão da seleção',
             hint: 'Lotes preservam os caminhos; origens explícitas mantêm o nome'
           },
+          { value: 'contents', label: 'Somente o conteúdo das pastas', hint: 'dist/lib/a.js → destino/lib/a.js' },
           { value: 'tree', label: 'Preservar caminhos relativos à raiz' },
           { value: 'flat', label: 'Reunir arquivos no destino' }
         ]
@@ -116,16 +117,20 @@ export async function chooseMove(initial, root) {
     )
     config.preserveTree = structure === 'tree'
     config.flatten = structure === 'flat'
-    p.log.info(
-      'Se selecionou somente um arquivo ou uma pasta, você pode mudar seu nome no destino. Deixe vazio para manter o nome atual.'
-    )
-    config.rename = await ask(
-      p.text({
-        message: 'Qual será o nome no destino? (opcional)',
-        placeholder: 'Exemplo: ferias.jpg',
-        initialValue: config.rename
-      })
-    )
+    config.contents = structure === 'contents'
+    if (config.contents) config.rename = ''
+    else {
+      p.log.info(
+        'Se selecionou somente um arquivo ou uma pasta, você pode mudar seu nome no destino. Deixe vazio para manter o nome atual.'
+      )
+      config.rename = await ask(
+        p.text({
+          message: 'Qual será o nome no destino? (opcional)',
+          placeholder: 'Exemplo: ferias.jpg',
+          initialValue: config.rename
+        })
+      )
+    }
     if (!config.copy) {
       p.log.info(
         'Entre os arquivos e pastas que você selecionou para mover, quais devem continuar onde estão? Deixe vazio para mover todos.'
