@@ -64,10 +64,12 @@ export function exclusionOptions(selection, root = process.cwd()) {
 /**
  * @param {Selection} inclusion
  * @param {Selection} exclusion
+ * @param {string} root
+ * @param {{quiet?: boolean}} options
  */
-export async function findFiles(inclusion, exclusion, root = process.cwd()) {
-  const waiting = p.spinner()
-  waiting.start('Localizando arquivos...')
+export async function findFiles(inclusion, exclusion, root = process.cwd(), { quiet = false } = {}) {
+  const waiting = quiet ? null : p.spinner()
+  waiting?.start('Localizando arquivos...')
 
   try {
     const matches = await globby(inclusionPatterns(inclusion, root), {
@@ -86,10 +88,10 @@ export async function findFiles(inclusion, exclusion, root = process.cwd()) {
       throw new Error(`Mais de ${MAX_FILES} arquivos. Restrinja os filtros de inclusão.`)
     }
 
-    waiting.stop(`${files.length} arquivos encontrados`)
+    waiting?.stop(`${files.length} arquivos encontrados`)
     return files
   } catch (error) {
-    waiting.stop('Não foi possível localizar os arquivos')
+    waiting?.stop('Não foi possível localizar os arquivos')
     throw error
   }
 }
@@ -106,9 +108,9 @@ function looksLikeText(buffer) {
   return controls <= sample.length * 0.02
 }
 
-/** @param {string[]} files */
-export async function buildClipboard(files, root = process.cwd()) {
-  const bar = createProgress(files.length, 'Lendo arquivos')
+/** @param {string[]} files @param {string} root @param {{quiet?: boolean}} options */
+export async function buildClipboard(files, root = process.cwd(), { quiet = false } = {}) {
+  const bar = quiet ? null : createProgress(files.length, 'Lendo arquivos')
 
   const chunks = []
   const skipped = []
@@ -162,13 +164,13 @@ export async function buildClipboard(files, root = process.cwd()) {
         }
       }
 
-      bar.update(i + 1)
+      bar?.update(i + 1)
     }
 
-    bar.stop(`${chunks.length} arquivos preparados`)
+    bar?.stop(`${chunks.length} arquivos preparados`)
     return { output: chunks.join('\n\n'), copied: chunks.length, skipped, bytes: totalBytes }
   } catch (error) {
-    bar.stop('Não foi possível preparar a cópia')
+    bar?.stop('Não foi possível preparar a cópia')
     throw error
   }
 }

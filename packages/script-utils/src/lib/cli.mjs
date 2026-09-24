@@ -36,16 +36,16 @@ export function formatBytes(bytes) {
   return `${(bytes / 1024 ** 2).toFixed(1)} MiB`
 }
 
-/** @param {{ name: string, description: string, manifest: URL, run: () => Promise<void> }} options */
-export async function runCli({ name, description, manifest, run }) {
+/** @param {{ name: string, description: string, manifest: URL, run: () => Promise<void>, allowArgs?: boolean, help?: string }} options */
+export async function runCli({ name, description, manifest, run, allowArgs = false, help }) {
   const args = process.argv.slice(2)
   try {
     if (args.length === 1 && ['--help', '-h'].includes(args[0] ?? '')) {
-      console.log(`Uso: ${name}\n\n${description}\nOpções: --help, --version`)
+      console.log(help ?? `Uso: ${name}\n\n${description}\nOpções: --help, --version`)
     } else if (args.length === 1 && ['--version', '-v'].includes(args[0] ?? '')) {
       const { version } = JSON.parse(await readFile(manifest, 'utf8'))
       console.log(version)
-    } else if (args.length) {
+    } else if (args.length && !allowArgs) {
       throw new Error(`Argumentos desconhecidos: ${args.join(' ')}`)
     } else {
       await run()

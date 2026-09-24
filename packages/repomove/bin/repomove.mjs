@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-import { help, runClean } from '@raulscoelho/script-utils/clean'
 import { runCli } from '@raulscoelho/script-utils/lib/cli'
+import { help, runMove } from '@raulscoelho/script-utils/move'
 
 await runCli({
-  name: 'repoclean',
-  description: 'Limpe arquivos e diretórios com prévia e confirmação.',
+  name: 'repomove',
+  description: 'Mova arquivos com prévia, histórico e reversão.',
   manifest: new URL('../package.json', import.meta.url),
   allowArgs: true,
   help,
-  run: runClean
+  run: runMove
 })

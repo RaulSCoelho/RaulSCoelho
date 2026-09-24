@@ -1,6 +1,6 @@
 {
   "name": "@raulscoelho/eslint",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Presets compartilhados de ESLint com TypeScript e Prettier.",
   "repository": {
     "type": "git",

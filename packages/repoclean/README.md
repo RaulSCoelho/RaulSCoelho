@@ -1,58 +1,87 @@
 # @raulscoelho/repoclean
 
-CLI interativo para limpar arquivos e diretórios do projeto, com prévia e confirmação antes de excluir.
+Remove arquivos e pastas do projeto com seleção, prévia e confirmação. Requer Node.js 24+.
 
-Requer Node.js 24+ e terminal interativo.
-
-## Instalação e uso
+## Começar
 
 ```sh
 pnpm add -D @raulscoelho/repoclean
 pnpm exec repoclean
 ```
 
-Execute no diretório que deseja limpar. Marque as opções com Espaço, pressione Enter e confira os caminhos apresentados. A confirmação começa em **Não**. Após confirmar, uma barra acompanha a quantidade de itens removidos.
+Execute na raiz do projeto. No menu, marque as opções com Espaço, avance com Enter e confira
+a lista antes de confirmar. **Não** é a resposta padrão. Uma barra acompanha a remoção.
 
-Para usar `pnpm clean`, adicione ao `package.json`:
+Para usar `pnpm clean`, adicione `"clean": "repoclean"` aos `scripts` do `package.json`.
 
-```json
-{
-  "scripts": {
-    "clean": "repoclean"
-  }
-}
+## Usar por argumentos
+
+Conferir todos os builds e caches do Turbo que seriam removidos:
+
+```sh
+pnpm exec repoclean --preset build --preset turbo --dry-run
 ```
+
+Retire `--dry-run` para receber a prévia e a pergunta de confirmação. Para executar sem
+perguntas, inclusive em CI, use `--yes`:
+
+```sh
+pnpm exec repoclean --preset build --preset turbo --yes
+```
+
+Você também pode selecionar itens diretamente:
+
+```sh
+pnpm exec repoclean --dir apps/web/cache --ext .log --dry-run
+```
+
+Esse exemplo seleciona a pasta `apps/web/cache` inteira e os arquivos `.log` do projeto.
+
+## Presets
+
+Todos procuram também nas subpastas. Combine-os repetindo `--preset`.
+
+| Preset | O que remove |
+| --- | --- |
+| `build` | Pastas `dist`, `build`, `out` e `.next` |
+| `turbo` | Pastas `.turbo` |
+| `node-modules` | Pastas `node_modules` |
+| `lockfiles` | `pnpm-lock.yaml`, `package-lock.json`, `npm-shrinkwrap.json`, `yarn.lock`, `bun.lock` e `bun.lockb` |
+| `generated` | Build, Turbo, `coverage` e arquivos `*.tsbuildinfo` |
+| `workspace` | Generated e Node Modules |
+
+`workspace` mantém os lockfiles, exceto os que estiverem dentro de uma pasta removida ou forem
+selecionados por outro filtro. A busca não percorre dependências instaladas, mas uma pasta
+`node_modules` selecionada é removida por inteiro.
 
 ## Opções
 
-| Opção | Alvos |
+| Opção | O que faz |
 | --- | --- |
-| Build | Pastas `dist`, `build`, `out` e `.next` |
-| Turbo | Pastas `.turbo` |
-| Node Modules | Pastas `node_modules` |
-| Lockfiles | `pnpm-lock.yaml`, `package-lock.json`, `npm-shrinkwrap.json`, `yarn.lock`, `bun.lock` e `bun.lockb` |
-| Generated | Build, Turbo, `coverage` e arquivos `*.tsbuildinfo` |
-| Workspace | Generated e Node Modules |
-| Arquivos | Nomes ou caminhos relativos, como `debug.log` ou `apps/web/debug.log` |
-| Diretórios | Caminhos relativos, como `apps/web/cache` |
-| Extensões | Extensões como `.log` e `.tmp` |
-| Avançado | Combinação de arquivos, diretórios, extensões e globs |
+| `--preset <nome>` | Seleciona um preset da tabela acima |
+| `--file <nome-ou-caminho>` | Seleciona um arquivo; só o nome procura também nas subpastas |
+| `--dir <pasta>` | Seleciona uma pasta com todo seu conteúdo |
+| `--ext <extensão>` | Seleciona arquivos pela extensão, como `.log` |
+| `--glob <padrão>` | Seleciona arquivos ou pastas, como `'apps/**/cache'` |
+| `--dry-run` | Mostra a prévia sem apagar nada, mesmo junto de `--yes` |
+| `--yes` | Executa sem pedir confirmação |
+| `--interactive` | Abre o menu para completar a seleção |
+| `--help`, `-h` | Mostra ajuda e exemplos |
+| `--version`, `-v` | Mostra a versão |
 
-As opções podem ser combinadas na mesma execução. Os presets procuram alvos também nas subpastas, sem percorrer dependências instaladas. Workspace mantém os lockfiles do projeto, salvo se Lockfiles também for selecionado ou se estiverem dentro de uma pasta que será removida.
+Os filtros de seleção são repetíveis e combinados. Itens sobrepostos são removidos uma única vez.
+Use caminhos relativos à raiz e globs entre aspas. No menu avançado, separe globs com ponto e
+vírgula; os demais filtros usam vírgula.
 
-Arquivos, diretórios e extensões são separados por vírgula. Globs são separados por ponto e vírgula, como `apps/**/cache; **/*.tmp`. Os filtros são combinados por união, e alvos sobrepostos são removidos uma única vez.
+## Cuidados com a remoção
 
-## Prévia e remoção
+A limpeza é permanente e não tem `undo`. A prévia inclui arquivos ocultos e ignorados pelo Git;
+uma pasta listada inclui todo o conteúdo. Encerre builds e instalações antes de confirmar.
 
-A prévia mostra a raiz, todos os caminhos selecionados, a quantidade de itens e o tamanho dos arquivos. Uma pasta selecionada inclui todo o seu conteúdo. A busca inclui arquivos ocultos e ignorados pelo Git.
+A raiz e os metadados `.git` são protegidos. Selecionar uma pasta que contenha `.git` bloqueia
+a operação. Links simbólicos não são seguidos; links dentro de pastas selecionadas são removidos
+sem apagar seus destinos.
 
-A raiz do projeto e os metadados `.git` são protegidos. Pastas que contenham metadados Git também bloqueiam a operação. Links simbólicos não são seguidos; links dentro de pastas selecionadas são removidos sem apagar seus destinos.
-
-Encerre builds, servidores e instalações antes de limpar. Os alvos são conferidos novamente antes da remoção; alterações detectadas interrompem a operação. A limpeza é permanente e não é uma transação: em caso de erro durante a execução, itens já removidos não são restaurados. Mudanças concorrentes no sistema de arquivos não podem ser eliminadas apenas por essas verificações.
-
-## Ajuda
-
-```sh
-pnpm exec repoclean --help
-pnpm exec repoclean --version
-```
+O RepoClean revalida os alvos antes de excluir. Se detectar uma alteração ou falhar durante
+a execução, interrompe e informa quantos itens já removeu. Eles não são restaurados.
+As verificações não impedem que outro processo altere arquivos simultaneamente.

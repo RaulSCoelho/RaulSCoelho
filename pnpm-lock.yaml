@@ -20,6 +20,9 @@ importers:
       '@raulscoelho/repoclip':
         specifier: workspace:*
         version: link:packages/repoclip
+      '@raulscoelho/repomove':
+        specifier: workspace:*
+        version: link:packages/repomove
       '@raulscoelho/typescript':
         specifier: workspace:*
         version: link:packages/typescript
@@ -102,6 +105,22 @@ importers:
         version: 6.0.3
 
   packages/repoclip:
+    dependencies:
+      '@raulscoelho/script-utils':
+        specifier: workspace:*
+        version: link:../script-utils
+    devDependencies:
+      '@raulscoelho/typescript':
+        specifier: workspace:*
+        version: link:../typescript
+      '@types/node':
+        specifier: ^24
+        version: 24.13.6
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/repomove:
     dependencies:
       '@raulscoelho/script-utils':
         specifier: workspace:*

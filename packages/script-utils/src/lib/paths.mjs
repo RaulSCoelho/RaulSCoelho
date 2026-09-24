@@ -34,3 +34,8 @@ export function isGitMetadataPath(file) {
     .split('/')
     .some(part => part.toLowerCase() === '.git')
 }
+
+/** @param {string} value */
+export function hasControlCharacters(value) {
+  return [...value].some(character => character.charCodeAt(0) < 32 || character.charCodeAt(0) === 127)
+}

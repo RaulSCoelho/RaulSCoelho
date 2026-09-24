@@ -1,19 +1,35 @@
-# Changesets
+# Versões e publicação
 
-Antes de versionar, execute `pnpm changeset` para selecionar os pacotes alterados, o tipo de
-atualização (`patch`, `minor` ou `major`) e um resumo. O comando gera um arquivo `.md` nesta
-pasta; seu texto será usado nos changelogs. Inclua-o no commit da alteração.
+Depois de alterar um pacote, execute:
 
-Para publicar, siga esta ordem:
+```sh
+pnpm changeset
+```
 
-1. Confira os aumentos com `pnpm changeset status`.
-2. Execute `pnpm version-packages` para atualizar versões, changelogs e lockfile.
-3. Valide com `pnpm verify` e confira os tarballs gerados por `pnpm pack:packages`.
-4. Revise as alterações e faça o commit antes da publicação.
-5. Execute `pnpm release` para publicar no npm.
-6. Envie o commit com `git push` e as tags com `git push --tags`.
+Escolha os pacotes, o tipo de atualização e escreva um resumo para o changelog:
+`patch` para correções, `minor` para funcionalidades e `major` para mudanças incompatíveis.
+O comando cria um `.md` nesta pasta. Inclua-o no commit da alteração.
 
-`version-packages` remove os changesets consumidos. Não os recrie para o mesmo release.
+Quando for publicar:
 
-Consulte o [fluxo completo de publicação](../docs/packages.md#versões-e-publicação)
-para os comandos de revisão, commit e autenticação.
+```sh
+pnpm changeset status   # conferir as versões previstas
+pnpm version-packages  # aplicar versões, changelogs e lockfile
+pnpm verify            # validar lint e tipos
+pnpm pack:packages     # conferir os pacotes em artifacts/
+```
+
+Revise os arquivos e faça o commit **antes de publicar**, para que as tags apontem para
+o código publicado. Com a conta npm autenticada e autorizada no escopo:
+
+```sh
+pnpm release
+git push
+git push --tags
+```
+
+`version-packages` remove os changesets consumidos; não os recrie para o mesmo release.
+`release` valida novamente e publica no npm. Envie o commit e as tags após conferir o sucesso.
+
+Consulte o [fluxo completo](../docs/packages.md#versões-e-publicação) para revisão,
+commit e autenticação com `npm login`.

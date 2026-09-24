@@ -1,6 +1,6 @@
 {
   "name": "@raulscoelho/repoclean",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Limpe arquivos e diretórios do projeto com prévia e confirmação.",
   "repository": {
     "type": "git",

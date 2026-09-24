@@ -13,6 +13,7 @@
     "verify": "turbo run lint typecheck",
     "copy": "repoclip",
     "clean": "repoclean",
+    "move": "repomove",
     "version-packages": "changeset version && pnpm install --lockfile-only",
     "release": "pnpm verify && changeset publish",
     "pack:packages": "pnpm -r pack --pack-destination artifacts"
@@ -22,6 +23,7 @@
     "@raulscoelho/eslint": "workspace:*",
     "@raulscoelho/repoclean": "workspace:*",
     "@raulscoelho/repoclip": "workspace:*",
+    "@raulscoelho/repomove": "workspace:*",
     "@raulscoelho/typescript": "workspace:*",
     "eslint": "^9",
     "globals": "17.12.0",

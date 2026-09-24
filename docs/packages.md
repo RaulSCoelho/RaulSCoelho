@@ -47,7 +47,7 @@ com contratos JSDoc quando necessário. Pacotes que contêm apenas presets JSON 
 2. Defina os pontos de entrada com `exports` e, quando houver CLI, `bin`. Use `files` para limitar
    o conteúdo publicado e `publishConfig.access: "public"` para publicação pública.
 3. Declare dependências de execução no próprio pacote. Para dependências internas publicáveis,
-   use `workspace:^`; o pnpm converte esse protocolo em ranges semver ao empacotar e publicar.
+   use `workspace:*`; o pnpm converte esse protocolo em ranges semver ao empacotar e publicar.
 4. Adicione os scripts de desenvolvimento adequados ao pacote. Se houver compilação, configure as dependências
    de tarefas e os artefatos de saída no Turborepo.
 5. Documente instalação, uso e particularidades no `README.md` do pacote.

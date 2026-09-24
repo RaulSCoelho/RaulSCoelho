@@ -49,3 +49,7 @@ next-env.d.ts
 # npm packages
 artifacts/
 *.tgz
+
+# repomove history, backups and interrupted copies
+.repomove/
+.repomove-tmp-*

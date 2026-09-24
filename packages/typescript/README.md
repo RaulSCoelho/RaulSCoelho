@@ -1,16 +1,15 @@
 # @raulscoelho/typescript
 
-Presets de `tsconfig.json` para TypeScript, Next.js e bibliotecas React, com tipagem estrita e resolução de módulos para bundlers.
+Configurações de TypeScript para projetos com bundler, Next.js e bibliotecas React.
+Ativam a checagem estrita e, por padrão, verificam o código sem gerar arquivos.
 
-## Instalação
+## Instalar e usar
 
 ```sh
 pnpm add -D @raulscoelho/typescript typescript@~6.0.3
 ```
 
-## Uso
-
-Estenda o preset no `tsconfig.json`:
+Crie `tsconfig.json` apontando para os arquivos do projeto:
 
 ```json
 {
@@ -19,27 +18,27 @@ Estenda o preset no `tsconfig.json`:
 }
 ```
 
-Adicione o script ao `package.json` e execute `pnpm typecheck`:
+Adicione `"typecheck": "tsc --noEmit"` aos `scripts` do `package.json` e execute:
 
-```json
-{
-  "scripts": {
-    "typecheck": "tsc --noEmit"
-  }
-}
+```sh
+pnpm typecheck
 ```
 
-## Presets
+## Escolher o preset
 
 | Valor de `extends` | Configuração |
 | --- | --- |
 | `@raulscoelho/typescript/base` | Modo estrito, alvo ES2023, módulos preservados e resolução por bundler |
-| `@raulscoelho/typescript/next` | Base com JSX, DOM, tipos de Node.js, compilação incremental e plugin do Next.js |
+| `@raulscoelho/typescript/next` | Base com JSX, DOM, tipos de Node.js, cache incremental e plugin do Next.js |
 | `@raulscoelho/typescript/react-library` | Base com JSX, DOM e verificações de código não utilizado e fallthrough em `switch` |
 
-Todos usam `noEmit: true`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `verbatimModuleSyntax` e `skipLibCheck`. Defina `include`, `exclude` e as opções específicas da aplicação no seu `tsconfig.json`.
+Todos incluem `noEmit`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`,
+`verbatimModuleSyntax` e `skipLibCheck`. Defina `include`, `exclude` e as opções próprias
+do projeto no seu arquivo.
 
 ### Next.js
+
+Em uma aplicação com Next.js, React e os tipos `@types/node`, `@types/react` e `@types/react-dom`:
 
 ```json
 {
@@ -55,9 +54,9 @@ Todos usam `noEmit: true`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTyp
 }
 ```
 
-Use em uma aplicação com Next.js, React e os tipos `@types/node`, `@types/react` e `@types/react-dom` instalados.
+### Biblioteca React
 
-### Bibliotecas React
+Em uma biblioteca com React e `@types/react` instalados:
 
 ```json
 {
@@ -66,11 +65,11 @@ Use em uma aplicação com Next.js, React e os tipos `@types/node`, `@types/reac
 }
 ```
 
-A biblioteca precisa de React e `@types/react`. Se usar React DOM, inclua também `@types/react-dom`.
+Se usar React DOM, instale também seus tipos, `@types/react-dom`.
 
-## Emissão de declarações
+## Gerar declarações de tipos
 
-Para gerar arquivos `.d.ts`, habilite a emissão no `tsconfig.json`:
+Para emitir `.d.ts`, sobrescreva `noEmit` e configure a saída:
 
 ```json
 {
@@ -86,4 +85,5 @@ Para gerar arquivos `.d.ts`, habilite a emissão no `tsconfig.json`:
 }
 ```
 
-Execute `pnpm exec tsc -p tsconfig.json`. Esse exemplo emite apenas declarações; a geração de JavaScript fica a cargo da ferramenta de build da biblioteca.
+Execute `pnpm exec tsc -p tsconfig.json`. As declarações serão geradas em `dist/`.
+Esse exemplo não gera JavaScript; configure a ferramenta de build da biblioteca para isso.

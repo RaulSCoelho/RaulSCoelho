@@ -1,26 +1,26 @@
 # @raulscoelho/eslint
 
-Configurações de ESLint para JavaScript, TypeScript, Node.js, React e Next.js, com regras de imports e formatação pelo Prettier.
+Configurações de ESLint para JavaScript, TypeScript, Node.js, React e Next.js.
+Inclui regras de imports e formatação, aplicadas pelo próprio ESLint.
 
-## Instalação
+## Instalar e usar
 
 ```sh
 pnpm add -D @raulscoelho/eslint eslint@^9.22.0 typescript@~6.0.3 prettier@^3.0.0
 ```
 
-Compatível com ESLint 9, Prettier 3 e TypeScript `>=5.0.0 <6.1.0`. Os plugins internos são instalados junto com o pacote.
+Os plugins internos vêm com o pacote. As versões aceitas são ESLint 9, Prettier 3 e
+TypeScript `>=5.0.0 <6.1.0`.
 
-## Uso
-
-Crie um `eslint.config.mjs`:
+Crie `eslint.config.mjs`:
 
 ```js
-import baseConfig from '@raulscoelho/eslint/base'
+import config from '@raulscoelho/eslint/base'
 
-export default baseConfig
+export default config
 ```
 
-Adicione os scripts ao `package.json`:
+Adicione ao `package.json`:
 
 ```json
 {
@@ -31,32 +31,34 @@ Adicione os scripts ao `package.json`:
 }
 ```
 
-Execute `pnpm lint` para verificar o código e `pnpm lint:fix` para aplicar correções.
+Use `pnpm lint` para verificar e `pnpm lint:fix` para corrigir e formatar.
 
-## Presets
+## Escolher a configuração
 
-Escolha o subpath no import, como `@raulscoelho/eslint/node`:
+Troque o final do import pelo preset adequado. Para um projeto Node.js, por exemplo,
+use `@raulscoelho/eslint/node`.
 
-| Preset | Configuração | Dependência adicional |
+| Preset | Quando usar | Instalação adicional |
 | --- | --- | --- |
-| `base` | JavaScript, TypeScript, imports e Prettier; sem globals de ambiente | — |
-| `node` | Base com globals do Node.js | — |
-| `next` | Next.js, Core Web Vitals, TypeScript, imports e Prettier | `eslint-config-next@^16.0.0` |
-| `react-library` | React Hooks, TypeScript, imports, Prettier e globals de navegador em `src/` | `eslint-plugin-react-hooks@^7.0.0` |
-| `type-checked` | Base com regras que dependem de informações de tipos | — |
-| `prettier` | Integração e opções de formatação do Prettier | — |
+| `base` | JS/TS com imports e formatação, sem globais de ambiente | — |
+| `node` | Base com globais como `process` e `Buffer` | — |
+| `next` | Next.js com Core Web Vitals e TypeScript | `pnpm add -D eslint-config-next@^16` |
+| `react-library` | Bibliotecas React com Hooks e globais de navegador | `pnpm add -D eslint-plugin-react-hooks@^7` |
+| `type-checked` | Regras que precisam conhecer os tipos do projeto | Configuração abaixo |
+| `prettier` | Somente integração e opções de formatação | — |
 
-Instale a dependência adicional do preset escolhido com `pnpm add -D`. Cada preset pode ser usado diretamente como configuração. Em `react-library`, os globals de navegador se aplicam a `.js`, `.jsx`, `.ts` e `.tsx` em `src/`, exceto arquivos `*.config.*`.
+Cada preset pode ser usado diretamente como configuração. Em `react-library`, os globais de
+navegador valem para JS/TS em `src/`, exceto arquivos `*.config.*`.
 
-### Análise com tipos
+### Verificações que usam tipos
 
-O preset `type-checked` precisa do serviço de projetos do TypeScript:
+Crie um `tsconfig.json` que inclua os arquivos analisados e habilite o serviço de projetos:
 
 ```js
-import typeCheckedConfig from '@raulscoelho/eslint/type-checked'
+import config from '@raulscoelho/eslint/type-checked'
 import { defineConfig } from 'eslint/config'
 
-export default defineConfig(typeCheckedConfig, {
+export default defineConfig(config, {
   files: ['**/*.{ts,tsx,mts,cts}'],
   languageOptions: {
     parserOptions: {
@@ -67,26 +69,25 @@ export default defineConfig(typeCheckedConfig, {
 })
 ```
 
-Os arquivos analisados devem pertencer ao `tsconfig.json` da aplicação. Configure os globals de ambiente conforme necessário.
+Esse preset usa a base; acrescente globais de Node.js ou navegador se o projeto precisar.
 
-## Personalização
+## Personalizar
 
-Acrescente regras e exclusões depois do preset:
+Acrescente exclusões e regras depois do preset:
 
 ```js
-import baseConfig from '@raulscoelho/eslint/base'
+import config from '@raulscoelho/eslint/node'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
-export default defineConfig(baseConfig, globalIgnores(['generated/**']), {
-  files: ['**/*.{ts,tsx}'],
-  rules: {
-    '@typescript-eslint/no-explicit-any': 'warn'
-  }
+export default defineConfig(config, globalIgnores(['generated/**']), {
+  rules: { 'no-console': 'warn' }
 })
 ```
 
-## Formatação
+## Formatação incluída
 
-Os presets incluem aspas simples, ausência de ponto e vírgula e vírgulas finais, indentação de dois espaços, largura de 120 caracteres e finais de linha LF.
+Os presets usam aspas simples, dois espaços, linhas de até 120 caracteres e finais LF,
+sem ponto e vírgula ou vírgulas finais. `pnpm lint:fix` aplica essas opções.
 
-As classes Tailwind são ordenadas também nas funções `cva`, `cn`, `clsx`, `classNames`, `cx`, `tv` e `twMerge`. A formatação é aplicada por `pnpm lint:fix`.
+Também ordenam classes Tailwind, inclusive nas funções `cva`, `cn`, `clsx`, `classNames`,
+`cx`, `tv` e `twMerge`. Essas regras já estão configuradas no preset.
