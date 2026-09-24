@@ -58,23 +58,69 @@ O diretório é descoberto pelo padrão de workspaces; não é necessário mante
 
 ## Versões e publicação
 
+Cada pacote tem sua própria versão. O fluxo tem três etapas: registrar as mudanças,
+aplicar as versões e publicar no npm.
+
+### 1. Registrar as mudanças
+
+Depois de implementar uma alteração, execute:
+
 ```sh
-pnpm changeset                # seleciona pacotes e tipo de mudança: patch, minor ou major
+pnpm changeset
 pnpm changeset status
-pnpm version-packages         # atualiza versões, changelogs e lockfile
-pnpm verify
-pnpm pack:packages
-npm login
-pnpm release                  # valida e executa changeset publish
 ```
 
-Cada pacote tem sua própria versão: não há grupos de versões fixas ou vinculadas no Changesets.
-Registre changesets para os pacotes afetados por cada alteração. Dependências internas são
-atualizadas conforme os releases e as regras de `.changeset/config.json`.
+O primeiro comando pergunta quais pacotes mudaram, o tipo de atualização (`patch` para
+correções, `minor` para funcionalidades ou `major` para mudanças incompatíveis) e um resumo.
+Ele cria `.changeset/<nome>.md`; esse resumo será usado nos changelogs. Inclua o arquivo
+no commit da alteração se a publicação ficar para depois.
 
-Revise e faça commit dos changesets, versões, changelogs e lockfile. A conta npm precisa de
-permissão para publicar no escopo `@raulscoelho`. Após a publicação, envie os commits e tags
-criados pelo Changesets com `git push --follow-tags`.
+O comando `status` mostra os aumentos previstos, incluindo os propagados por dependências
+internas. Não é necessário criar outro changeset se a alteração já estiver registrada.
+
+### 2. Aplicar as versões e validar
+
+Quando estiver pronto para publicar os changesets pendentes:
+
+```sh
+pnpm version-packages
+pnpm verify
+pnpm pack:packages
+```
+
+`version-packages` consome os arquivos de changeset, atualiza versões e dependências internas,
+gera os changelogs e atualiza o lockfile. Os arquivos consumidos são removidos; não os recrie
+para o mesmo release.
+
+`verify` executa lint e typecheck. `pack:packages` gera os tarballs em `artifacts/` para conferir
+os arquivos e manifests que serão publicados, sem enviar nada ao npm.
+
+Revise as alterações, incluindo versões, changelogs e lockfile, e faça o commit **antes de
+publicar**. Assim, as tags do release apontarão para o commit que contém o código publicado.
+
+```sh
+git status
+git diff
+# Selecione os arquivos revisados para o commit.
+git add <arquivos-do-release>
+git diff --cached
+git commit -m "chore(release): version packages"
+```
+
+### 3. Publicar e enviar ao Git
+
+A conta npm precisa de permissão para publicar no escopo `@raulscoelho`. Autentique-se
+com `npm login` caso ainda não esteja conectado. Depois:
+
+```sh
+pnpm release
+git push
+git push --tags
+```
+
+`release` executa `verify` novamente e publica as versões ainda ausentes no npm. O Changesets
+cria as tags locais dos pacotes publicados; os comandos Git enviam o commit e as tags ao remoto.
+Execute os pushes depois de conferir que a publicação terminou com sucesso.
 
 ## Referências
 
