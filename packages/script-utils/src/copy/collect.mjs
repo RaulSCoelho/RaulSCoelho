@@ -3,8 +3,9 @@ import { convertPathToPattern, globby } from 'globby'
 import { lstat, readFile, realpath } from 'node:fs/promises'
 import path from 'node:path'
 
-import { formatBytes } from '../lib/cli.mjs'
-import { isNodeModulesPath, withinRoot } from '../lib/paths.mjs'
+import { createProgress, formatBytes } from '../lib/cli.mjs'
+import { isNodeModulesPath } from '../lib/paths.mjs'
+import { extensionPattern, filePattern, folderPattern, globPattern } from '../lib/patterns.mjs'
 
 /**
  * @typedef {object} Selection
@@ -24,47 +25,6 @@ const decoder = new TextDecoder('utf-8', { fatal: true })
 
 // Imutável: nem "nenhuma exclusão" nem um !node_modules do ignore podem reverter isto.
 const MANDATORY_IGNORE = ['**/node_modules/**']
-
-/**
- * @param {string} value
- * @param {string} root
- */
-function filePattern(value, root) {
-  const { relative } = withinRoot(value, root)
-  const literal = convertPathToPattern(relative)
-  return relative.includes('/') ? literal : `**/${literal}`
-}
-
-/**
- * @param {string} value
- * @param {string} root
- */
-function folderPattern(value, root) {
-  const { relative } = withinRoot(value.replace(/[/\\]+$/, ''), root)
-  return `${convertPathToPattern(relative)}/**/*`
-}
-
-/** @param {string} value */
-function extensionPattern(value) {
-  const extension = value.trim().startsWith('.') ? value.trim() : `.${value.trim()}`
-  if (!/^\.[\w.+-]+$/.test(extension)) throw new Error(`Extensão inválida: ${value}`)
-  return `**/*${convertPathToPattern(extension)}`
-}
-
-/** @param {string} value */
-function globPattern(value) {
-  const glob = value.trim().replaceAll('\\', '/')
-  if (
-    !glob ||
-    glob.startsWith('!') ||
-    glob.startsWith('/') ||
-    /^[A-Za-z]:/.test(glob) ||
-    /(^|\/)\.\.(\/|$)/.test(glob)
-  ) {
-    throw new Error(`Glob inválido ou fora do projeto: ${value}`)
-  }
-  return glob
-}
 
 // Mesma lógica para inclusão e exclusão: os quatro filtros usam união (OU).
 /** @param {Selection} selection */
@@ -148,13 +108,11 @@ function looksLikeText(buffer) {
 
 /** @param {string[]} files */
 export async function buildClipboard(files, root = process.cwd()) {
-  const bar = p.progress({ max: files.length })
-  bar.start('Lendo arquivos · 0%')
+  const bar = createProgress(files.length, 'Lendo arquivos')
 
   const chunks = []
   const skipped = []
   let totalBytes = 0
-  let displayed = 0
 
   try {
     for (const [i, relative] of files.entries()) {
@@ -204,12 +162,7 @@ export async function buildClipboard(files, root = process.cwd()) {
         }
       }
 
-      const current = i + 1
-      const percent = Math.floor((current * 100) / files.length)
-      if (percent > Math.floor((displayed * 100) / files.length) || current === files.length) {
-        bar.advance(current - displayed, `Lendo arquivos · ${percent}% (${current}/${files.length})`)
-        displayed = current
-      }
+      bar.update(i + 1)
     }
 
     bar.stop(`${chunks.length} arquivos preparados`)

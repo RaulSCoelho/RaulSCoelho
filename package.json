@@ -12,6 +12,7 @@
     "typecheck": "turbo run typecheck",
     "verify": "turbo run lint typecheck",
     "copy": "repoclip",
+    "clean": "repoclean",
     "version-packages": "changeset version && pnpm install --lockfile-only",
     "release": "pnpm verify && changeset publish",
     "pack:packages": "pnpm -r pack --pack-destination artifacts"
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@changesets/cli": "^2.30.0",
     "@raulscoelho/eslint": "workspace:*",
+    "@raulscoelho/repoclean": "workspace:*",
     "@raulscoelho/repoclip": "workspace:*",
     "@raulscoelho/typescript": "workspace:*",
     "eslint": "^9",

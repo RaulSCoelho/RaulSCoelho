@@ -61,3 +61,21 @@ await copy()
 ## Limites
 
 `node_modules` é sempre excluído. A busca aceita até 10.000 arquivos. A leitura ignora links simbólicos, binários, arquivos que não sejam UTF-8 e arquivos acima de 2 MiB; o texto final é limitado a 20 MiB.
+
+## Limpeza interativa
+
+```js
+import { clean } from '@raulscoelho/script-utils/clean'
+
+await clean()
+```
+
+`clean({ root })` oferece presets e filtros combináveis, apresenta os alvos e pede confirmação antes de excluir. Requer terminal interativo; a raiz padrão é `process.cwd()`.
+
+Para integrar a limpeza a outra interface, use `planClean(selection, root)` e `removeCleanPlan(plan, { onProgress })`, exportados de `@raulscoelho/script-utils/clean/plan`. A seleção aceita `presets`, `files`, `folders`, `extensions` e `globs`. Os presets são `build`, `turbo`, `node-modules`, `lockfiles`, `generated` e `workspace`.
+
+O plano expõe `root`, `targets`, `count` e `bytes`. Apresente-o ao usuário e obtenha confirmação antes de chamar `removeCleanPlan`. O callback opcional `onProgress(removed)` recebe a contagem após cada remoção. Cada plano só pode ser usado uma vez e no processo que o criou. A remoção revalida os alvos, protege `.git` e não segue links simbólicos. Erros durante a execução podem deixar uma limpeza parcial.
+
+Os módulos `lib/filters` e `lib/patterns` compartilham os prompts e a conversão de filtros em globs entre os comandos. `runCli`, em `lib/cli`, trata ajuda, versão e erros dos CLIs.
+
+`createProgress(total, label)`, em `lib/cli`, fornece `update(current)` e `stop(message)` para barras de progresso. As atualizações visuais ocorrem quando o percentual muda ou a operação termina.

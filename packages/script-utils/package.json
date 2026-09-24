@@ -1,6 +1,6 @@
 {
   "name": "@raulscoelho/script-utils",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Utilitários reutilizáveis para CLIs e coleta de código.",
   "repository": {
     "type": "git",
@@ -13,7 +13,11 @@
     "./copy/collect": "./src/copy/collect.mjs",
     "./copy/choices": "./src/copy/choices.mjs",
     "./lib/cli": "./src/lib/cli.mjs",
-    "./lib/paths": "./src/lib/paths.mjs"
+    "./lib/paths": "./src/lib/paths.mjs",
+    "./clean": "./src/clean/index.mjs",
+    "./clean/plan": "./src/clean/plan.mjs",
+    "./lib/filters": "./src/lib/filters.mjs",
+    "./lib/patterns": "./src/lib/patterns.mjs"
   },
   "files": [
     "src"
