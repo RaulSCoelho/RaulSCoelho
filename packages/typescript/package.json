@@ -1,6 +1,6 @@
 {
   "name": "@raulscoelho/typescript",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Configurações compartilhadas de TypeScript.",
   "repository": {
     "type": "git",
@@ -10,12 +10,14 @@
   "exports": {
     "./base": "./base.json",
     "./next": "./next.json",
-    "./react-library": "./react-library.json"
+    "./react-library": "./react-library.json",
+    "./node": "./node.json"
   },
   "files": [
     "base.json",
     "next.json",
-    "react-library.json"
+    "react-library.json",
+    "node.json"
   ],
   "publishConfig": {
     "access": "public"
